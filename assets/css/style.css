@@ -1,0 +1,874 @@
+/* ============================================================
+   ANKUR DHANGAR — PORTFOLIO STYLESHEET
+   Architecture: CSS Custom Properties → Base → Layout → 
+                 Components → Sections → Utilities → Responsive
+   ============================================================ */
+
+/* -------------------------------------------------------
+   1. DESIGN TOKENS (CSS Custom Properties)
+------------------------------------------------------- */
+:root {
+  /* Background Scale */
+  --bg-base:    #0a0f1e;
+  --bg-surface: #111827;
+  --bg-card:    #1a2236;
+  --bg-elevated:#1f2d45;
+
+  /* Border */
+  --border:        rgba(148, 163, 184, 0.12);
+  --border-hover:  rgba(20, 184, 166, 0.4);
+
+  /* Text Scale */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+
+  /* Accent */
+  --accent:        #14b8a6;
+  --accent-dark:   #0d9488;
+  --accent-glow:   rgba(20, 184, 166, 0.15);
+
+  /* Typography */
+  --font: "Inter", sans-serif;
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+
+  /* Transitions */
+  --transition: 0.25s ease;
+  --transition-slow: 0.4s ease;
+
+  /* Layout */
+  --sidebar-width: 300px;
+  --navbar-height: 68px;
+  --content-max:   820px;
+}
+
+/* -------------------------------------------------------
+   2. RESET & BASE
+------------------------------------------------------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
+
+/* -------------------------------------------------------
+   3. LAYOUT — Two-Column App Shell
+------------------------------------------------------- */
+
+/* The page body after the navbar is a flex row */
+.page-shell {
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100vh - var(--navbar-height));
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  gap: 40px;
+}
+
+/* LEFT: Sticky independently scrollable sidebar */
+.profile-sidebar {
+  position: sticky;
+  top: var(--navbar-height);
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  padding: 32px 24px 40px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-elevated) transparent;
+}
+
+.profile-sidebar::-webkit-scrollbar        { width: 4px; }
+.profile-sidebar::-webkit-scrollbar-track  { background: transparent; }
+.profile-sidebar::-webkit-scrollbar-thumb  { background: var(--bg-elevated); border-radius: 4px; }
+
+/* RIGHT: Main scrollable content */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 48px 0 80px;
+  max-width: var(--content-max);
+}
+
+/* -------------------------------------------------------
+   4. NAVBAR
+------------------------------------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--navbar-height);
+  background: rgba(10, 15, 30, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* -------------------------------------------------------
+   5. SIDEBAR CONTENT COMPONENTS
+------------------------------------------------------- */
+.sidebar-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  margin: 0 auto 16px;
+}
+
+.sidebar-name {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  color: var(--accent);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+.sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Snapshot items */
+.snapshot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.snapshot-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.snapshot-item small {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.snapshot-item strong {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Socials */
+.socials {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.socials a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: var(--transition);
+  word-break: break-all;
+}
+
+.socials a:hover {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: var(--border-hover);
+}
+
+.socials .social-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------
+   6. SECTION ARCHITECTURE
+------------------------------------------------------- */
+.content-section {
+  margin-bottom: 72px;
+}
+
+.content-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Section Header */
+.section-header {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.section-title span { color: var(--accent); }
+
+.section-subtitle {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+}
+
+/* -------------------------------------------------------
+   7. CAPABILITY CARDS — Hover Reveal "Explore Now"
+------------------------------------------------------- */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.capability-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px 20px;
+  min-height: 210px;
+  text-align: center;
+}
+
+.capability-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+}
+
+.capability-card .cap-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+  transition: filter var(--transition-slow);
+}
+
+.capability-card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: opacity var(--transition);
+}
+
+/* Hover overlay — blur + Explore Now */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 30, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  border-radius: var(--radius-lg);
+}
+
+.capability-card:hover .card-overlay { opacity: 1; }
+.capability-card:hover .cap-img      { filter: blur(2px); }
+
+.explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+
+.explore-btn:hover {
+  background: var(--accent-dark);
+  transform: scale(1.04);
+}
+
+/* -------------------------------------------------------
+   8. ABOUT SECTION
+------------------------------------------------------- */
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-body p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* -------------------------------------------------------
+   9. TIMELINE (Experience & Education)
+------------------------------------------------------- */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 36px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 3px solid var(--bg-base);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.timeline-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.timeline-role {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.timeline-org {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* -------------------------------------------------------
+   10. SECTION CARDS — Projects / Analytics / Research
+        Same hover-reveal pattern as Capabilities
+------------------------------------------------------- */
+.section-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.section-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  overflow: hidden;
+  transition: border-color var(--transition), transform var(--transition);
+  cursor: pointer;
+}
+
+.section-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+}
+
+.section-card-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-glow);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  border: 1px solid var(--border-hover);
+}
+
+.section-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.section-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--accent-glow);
+  color: var(--accent);
+  border: 1px solid var(--border-hover);
+  letter-spacing: 0.3px;
+}
+
+/* Hover overlay same pattern */
+.section-card .card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 30, 0.80);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  border-radius: var(--radius-lg);
+}
+
+.section-card:hover .card-overlay { opacity: 1; }
+
+/* -------------------------------------------------------
+   11. RESEARCH CARDS (2 col)
+------------------------------------------------------- */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.research-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.research-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.research-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.research-card ul li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.research-card ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------
+   12. CV SECTION
+------------------------------------------------------- */
+.cv-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cv-block h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.cv-block p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.cv-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* -------------------------------------------------------
+   13. CONTACT SECTION
+------------------------------------------------------- */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-links a {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.contact-links a:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  resize: vertical;
+  transition: border-color var(--transition);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------
+   14. FOOTER
+------------------------------------------------------- */
+footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding: 32px 24px;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.footer-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* -------------------------------------------------------
+   15. RESPONSIVE
+------------------------------------------------------- */
+@media (max-width: 960px) {
+  .page-shell {
+    flex-direction: column;
+    padding: 0 16px;
+    gap: 0;
+  }
+
+  .profile-sidebar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 24px 16px;
+  }
+
+  .sidebar-avatar { width: 80px; height: 80px; }
+  .main-content   { padding: 32px 0 48px; }
+}
+
+@media (max-width: 720px) {
+  .capabilities-grid    { grid-template-columns: repeat(2, 1fr); }
+  .section-cards-grid   { grid-template-columns: 1fr; }
+  .research-grid        { grid-template-columns: 1fr; }
+  .contact-layout       { grid-template-columns: 1fr; }
+  .cv-block             { flex-direction: column; align-items: flex-start; }
+  .nav-links            { display: none; }
+  .menu-btn             { display: block; }
+}
+
+@media (max-width: 480px) {
+  .capabilities-grid { grid-template-columns: 1fr; }
+}
+
+/* -------------------------------------------------------
+   16. MOBILE NAV (active state toggled by JS)
+------------------------------------------------------- */
+.nav-links.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: var(--navbar-height);
+  left: 0;
+  right: 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px 20px;
+  gap: 2px;
+  z-index: 199;
+}
+
+.nav-links.active a {
+  padding: 10px 12px;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
