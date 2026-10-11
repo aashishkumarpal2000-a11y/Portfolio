@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEOR | Ankur Dhangar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    /* Inner page overrides */
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .inner-page-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .inner-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .inner-logo {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text-primary);
+    }
+    .inner-logo span { color: var(--accent); }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .back-link:hover { color: var(--accent); border-color: var(--border-hover); }
+    .inner-page-body {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      width: 100%;
+    }
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-glow);
+      border: 1px solid var(--border-hover);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .page-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .page-title span { color: var(--accent); }
+    .page-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .placeholder-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-xl);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .placeholder-icon { font-size: 48px; margin-bottom: 20px; }
+    .placeholder-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .placeholder-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .inner-footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<header class="inner-page-header">
+  <div class="inner-nav">
+    <a href="../../index.html" class="inner-logo">AD<span>.</span></a>
+    <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+  </div>
+</header>
+
+<main class="inner-page-body">
+  <span class="coming-soon-badge">⚡ Content Coming Soon</span>
+  <h1 class="page-title">Health Economics &amp;<br><span>Outcomes Research.</span></h1>
+  <p class="page-desc">Cost-effectiveness, cost-utility, cost-benefit analysis, Markov modelling, ICER, and decision modelling for evidence-based health policy.</p>
+
+  <div class="placeholder-box">
+    <div class="placeholder-icon">💰</div>
+    <h3>Content Under Development</h3>
+    <p>This section is being built with detailed case studies, methodologies, and results. Check back soon.</p>
+  </div>
+</main>
+
+<footer class="inner-footer">
+  <p>© 2026 Ankur Dhangar · Biostatistician</p>
+</footer>
+
+</body>
+</html>
